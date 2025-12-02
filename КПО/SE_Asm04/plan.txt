@@ -1,0 +1,2 @@
+int signedValue: -12345
+unsigned unsignedValue: 4294967295
