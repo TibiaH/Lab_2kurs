@@ -6,34 +6,30 @@ array DWORD 5, -2, 0, 8, 3, -1, 4
 
 .CODE
 main PROC
+mov EAX, 0
+mov ESI, 0
+mov ECX, 7
 
-mov EAX, array[0]
-add EAX, array[4]
-add EAX, array[8]
-add EAX, array[12]
-add EAX, array[16]
-add EAX, array[20]
-add EAX, array[24]
+sum_loop:
+add EAX, array[ESi*4]
+inc ESI
+loop sum_loop
 
 mov EBX, 1
-cmp array[0], 0
-je zero_found
-cmp array[4], 0
-je zero_found
-cmp array[8], 0
-je zero_found
-cmp array[12], 0
-je zero_found
-cmp array[16], 0
-je zero_found
-cmp array[20], 0
-je zero_found
-cmp array[24], 0
-jne no_zero
+mov ESI, 0
+mov ECX, 7
 
-zero_found:
+check_zero_loop:
+cmp array[ESI*4], 0
+jne not_zero
 mov EBX, 0
+jmp end_check
 
-no_zero:
+not_zero:
+inc ESI
+loop check_zero_loop
+
+end_check:
+
 main ENDP
 end main
